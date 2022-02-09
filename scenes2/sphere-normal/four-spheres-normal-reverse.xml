@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  First test scene, only uses spheres, Lambertian shading,
+      and one light directly above the center of the 3 spheres.
+ -->
+<scene>
+  <camera>
+    <viewPoint>-5 -4.5 -4</viewPoint>
+    <viewDir>5 3.5 4</viewDir>
+    <projNormal>-5 -3.5 -4</projNormal>
+    <viewUp>0 1 0</viewUp>
+    <viewWidth>0.75</viewWidth>
+    <viewHeight>0.76</viewHeight>
+  </camera>
+  <image>
+    300 300
+  </image>
+  <material name="red" type="Lambertian" />
+  <material name="green" type="Lambertian" />
+  <material name="blue" type="Lambertian" />
+  <material name="gray" type="Lambertian" />
+  <surface type="Sphere">
+    <material ref="red" />
+    <radius>1</radius>
+    <center>0 1 0.866</center>
+  </surface>
+  <surface type="Sphere">
+    <material ref="green" />
+    <radius>1</radius>
+    <center>1 1 -0.866</center>
+  </surface>
+  <surface type="Sphere">
+    <material ref="blue" />
+    <radius>1</radius>
+    <center>-1 1 -0.866</center>
+  </surface>
+  <surface type="Sphere">
+    <material ref="gray" />
+    <radius>100</radius>
+    <center>0 -100 0</center>
+  </surface>
+  <light type="NormalLight"/>
+</scene>

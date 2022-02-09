@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  A blue box sitting on a floor.
+ -->
+<scene>
+  <camera>
+    <viewPoint>-10 -4.8 -6</viewPoint>
+    <viewDir>5 2.4 3</viewDir>
+    <projNormal>-5 -2.4 -3</projNormal>
+    <viewUp>0 1 0</viewUp>
+    <projDistance>6</projDistance>
+    <viewWidth>4</viewWidth>
+    <viewHeight>2.25</viewHeight>
+  </camera>
+  <image>
+    320 180
+  </image>
+  <material name="blue" type="Lambertian" />
+  <material name="gray" type="Lambertian" />
+  <surface type="Box">
+    <material ref="blue" />
+    <minPt>-1 -1 -1</minPt>
+    <maxPt>1 1 1</maxPt>
+  </surface>
+  <surface type="Box">
+    <material ref="gray" />
+    <minPt>-5 -1.1 -6</minPt>
+    <maxPt>5 -1 6</maxPt>
+  </surface>
+  <light type="NormalLight"/>
+</scene>

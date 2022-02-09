@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  A box floating in empty space.
+ -->
+<scene>
+  <camera>
+    <viewPoint>5 2 3</viewPoint>
+    <viewDir>-5 -2 -3</viewDir>
+    <projNormal>5 2 3</projNormal>
+    <viewUp>0 1 0</viewUp>
+    <projDistance>4</projDistance>
+    <viewWidth>2.5</viewWidth>
+    <viewHeight>2.5</viewHeight>
+  </camera>
+  <image>
+    300 300 
+  </image>
+  <material name="blue" type="Lambertian">
+    <color>.2 .3 .8</color>
+  </material>
+  <surface type="Box">
+    <material ref="blue" />
+    <minPt>-1 -1 -1</minPt>
+    <maxPt>1 1 1</maxPt>
+  </surface>
+  <light type="ConstantLight"/>
+</scene>

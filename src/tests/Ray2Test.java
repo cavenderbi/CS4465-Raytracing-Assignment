@@ -1,9 +1,10 @@
 package tests;
 
-import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+
+import org.junit.Test;
 
 import ray.Camera;
 import ray.Image;
@@ -19,9 +20,8 @@ import ray.math.Vector3;
  * @version 2022-01-18
  * 
  */
-public class Ray1Test extends RayHelpers
+public class Ray2Test extends RayHelpers
 {
-	
     /**
      * This tests camera coordinate system.
      */
@@ -34,7 +34,7 @@ public class Ray1Test extends RayHelpers
 
 		// vp = z
 		cameraParams.add(new Vector3[] {
-			new Vector3( 0, 0,-1),
+			new Vector3( 1, 0,-1),
 			new Vector3( 0, 1, 0),
 			new Vector3( 0, 0, 1), 
 		});
@@ -46,7 +46,7 @@ public class Ray1Test extends RayHelpers
 
 		// vp = -z
 		cameraParams.add(new Vector3[] {
-			new Vector3( 0, 0, 1), 
+			new Vector3( 1, 0, 1), 
 			new Vector3( 0, 1, 0),
 			new Vector3( 0, 0,-1), 
 		});
@@ -58,7 +58,7 @@ public class Ray1Test extends RayHelpers
 
 		// vp = x
 		cameraParams.add(new Vector3[] {
-			new Vector3(-1, 0, 0), 
+			new Vector3(-1, 0, 1), 
 			new Vector3( 0, 1, 0),
 			new Vector3( 1, 0, 0),
 		});
@@ -70,7 +70,7 @@ public class Ray1Test extends RayHelpers
 
 		// vp = -x
 		cameraParams.add(new Vector3[] {
-			new Vector3( 1, 0, 0), 
+			new Vector3( 1, 0, 1), 
 			new Vector3( 0, 1, 0),
 			new Vector3(-1, 0, 0),
 		});
@@ -82,7 +82,7 @@ public class Ray1Test extends RayHelpers
 
 		// vp = (1, 1, 0)
 		cameraParams.add(new Vector3[] {
-			new Vector3(-1,-1, 0), 
+			new Vector3(-1,-1, 1), 
 			new Vector3( 0, 1, 0),
 			new Vector3( 1, 1, 0),
 		});
@@ -94,7 +94,7 @@ public class Ray1Test extends RayHelpers
 
 		// vp = (-1, 0, 1)
 		cameraParams.add(new Vector3[] {
-			new Vector3( 1, 0,-1), 
+			new Vector3( 1, 1,-1), 
 			new Vector3( 0, 1, 0),
 			new Vector3(-1, 0, 1),
 		});
@@ -106,7 +106,7 @@ public class Ray1Test extends RayHelpers
 
 		// vp = (1, 1, 1)
 		cameraParams.add(new Vector3[] {
-			new Vector3(-1,-1,-1),
+			new Vector3(-1, 0,-1),
 			new Vector3( 0, 1, 0),
 			new Vector3( 1, 1, 1),
 		});
@@ -115,10 +115,10 @@ public class Ray1Test extends RayHelpers
 			new Vector3(-.408, .816,-.408),
 			new Vector3( .577, .577,  .577), 
 		});
-
+		
 		// vp = (-1, -1, -1)
 		cameraParams.add(new Vector3[] {
-			new Vector3( 1, 1, 1),
+			new Vector3( 1, 0, 1),
 			new Vector3( 0, 1, 0),
 			new Vector3(-1,-1,-1),
 		});
@@ -127,6 +127,7 @@ public class Ray1Test extends RayHelpers
 			new Vector3(-.408, .816,-.408),
 			new Vector3(-.577,-.577,-.577),
 		});
+
 
 		Scene scene = new Scene();
 
@@ -152,7 +153,7 @@ public class Ray1Test extends RayHelpers
 			}
 		}
 	}
-	
+
 	/**
 	 * This tests the ray direction computation.
 	 */
@@ -170,9 +171,9 @@ public class Ray1Test extends RayHelpers
 
 		// vp = z
 		cameraParams.add(new Vector3[] {
-			new Vector3( 0, 0,-1),
+			new Vector3( 1, 0,-1),
 			new Vector3( 0, 1, 0),
-			new Vector3( 0, 0, 1),
+			new Vector3( 0, 0, 1), 
 		});
 		bases.add(new Vector3[] {
 			new Vector3( 1, 0, 0), 
@@ -182,12 +183,13 @@ public class Ray1Test extends RayHelpers
 		viewSizes.add(new Point2(1, 1));
 		imageSizes.add(new Point2(2, 2));
 		imageCoordinates.add(new Point2(0, 0));
-		correctDirections.add(new Vector3(-.25, -.25, -1));
+		correctDirections.add(new Vector3(0.45710678118654746,-0.25,-0.7071067811865475));
 		projectionDistances.add(1.0);
+
 
 		// vp = -z
 		cameraParams.add(new Vector3[] {
-			new Vector3( 0, 0, 1), 
+			new Vector3( 1, 0, 1), 
 			new Vector3( 0, 1, 0),
 			new Vector3( 0, 0,-1), 
 		});
@@ -199,12 +201,12 @@ public class Ray1Test extends RayHelpers
 		viewSizes.add(new Point2(2, 2));
 		imageSizes.add(new Point2(2, 8));
 		imageCoordinates.add(new Point2(0, 7));
-		correctDirections.add(new Vector3(.5, .875, 2));
+		correctDirections.add(new Vector3(1.914213562373095,0.875,1.414213562373095));
 		projectionDistances.add(2.0);
 
 		// vp = x
 		cameraParams.add(new Vector3[] {
-			new Vector3(-1, 0, 0), 
+			new Vector3(-1, 0, 1), 
 			new Vector3( 0, 1, 0),
 			new Vector3( 1, 0, 0),
 		});
@@ -216,12 +218,12 @@ public class Ray1Test extends RayHelpers
 		viewSizes.add(new Point2(1, 2));
 		imageSizes.add(new Point2(8, 8));
 		imageCoordinates.add(new Point2(7, 0));
-		correctDirections.add(new Vector3(-1, -.875, -.4375));
+		correctDirections.add(new Vector3(-0.7071067811865475,-0.875,0.26960678118654746));
 		projectionDistances.add(1.0);
 
 		// vp = -x
 		cameraParams.add(new Vector3[] {
-			new Vector3( 1, 0, 0), 
+			new Vector3( 1, 0, 1), 
 			new Vector3( 0, 1, 0),
 			new Vector3(-1, 0, 0),
 		});
@@ -233,12 +235,12 @@ public class Ray1Test extends RayHelpers
 		viewSizes.add(new Point2(2, 1));
 		imageSizes.add(new Point2(8, 2));
 		imageCoordinates.add(new Point2(7, 1));
-		correctDirections.add(new Vector3(2, .25, .875));
+		correctDirections.add(new Vector3(1.414213562373095,0.25,2.289213562373095));
 		projectionDistances.add(2.0);
 
 		// vp = (1, 1, 0)
 		cameraParams.add(new Vector3[] {
-			new Vector3(-1,-1, 0), 
+			new Vector3(-1,-1, 1), 
 			new Vector3( 0, 1, 0),
 			new Vector3( 1, 1, 0),
 		});
@@ -250,12 +252,12 @@ public class Ray1Test extends RayHelpers
 		viewSizes.add(new Point2(1, 1));
 		imageSizes.add(new Point2(2, 2));
 		imageCoordinates.add(new Point2(0, 0));
-		correctDirections.add(new Vector3(-0.530, -0.884, .25));
+		correctDirections.add(new Vector3(-0.4006002691896259,-0.7541002691896258,0.8273502691896258));
 		projectionDistances.add(1.0);
 
 		// vp = (-1, 0, 1)
 		cameraParams.add(new Vector3[] {
-			new Vector3( 1, 0,-1), 
+			new Vector3( 1, 1,-1), 
 			new Vector3( 0, 1, 0),
 			new Vector3(-1, 0, 1),
 		});
@@ -267,12 +269,12 @@ public class Ray1Test extends RayHelpers
 		viewSizes.add(new Point2(2, 2));
 		imageSizes.add(new Point2(2, 8));
 		imageCoordinates.add(new Point2(0, 7));
-		correctDirections.add(new Vector3(1.061, 0.875, -1.768));
+		correctDirections.add(new Vector3(0.8012005383792518,2.0297005383792515,-1.5082005383792516));
 		projectionDistances.add(2.0);
 
 		// vp = (1, 1, 1)
 		cameraParams.add(new Vector3[] {
-			new Vector3(-1,-1,-1),
+			new Vector3(-1, 0,-1),
 			new Vector3( 0, 1, 0),
 			new Vector3( 1, 1, 1),
 		});
@@ -284,12 +286,12 @@ public class Ray1Test extends RayHelpers
 		viewSizes.add(new Point2(1, 2));
 		imageSizes.add(new Point2(8, 8));
 		imageCoordinates.add(new Point2(7, 7));
-		correctDirections.add(new Vector3(-0.625, 0.137, -1.244));
+		correctDirections.add(new Vector3(-0.7547942811865475,0.714,-1.3734192811865473));
 		projectionDistances.add(1.0);
-
+		
 		// vp = (-1, -1, -1)
 		cameraParams.add(new Vector3[] {
-			new Vector3( 1, 1, 1),
+			new Vector3( 1, 0, 1),
 			new Vector3( 0, 1, 0),
 			new Vector3(-1,-1,-1),
 		});
@@ -301,8 +303,9 @@ public class Ray1Test extends RayHelpers
 		viewSizes.add(new Point2(2, 1));
 		imageSizes.add(new Point2(8, 2));
 		imageCoordinates.add(new Point2(7, 0));
-		correctDirections.add(new Vector3(.638, 0.951, 1.875));
+		correctDirections.add(new Vector3(0.8975885623730949,-0.204,2.1348385623730946));
 		projectionDistances.add(2.0);
+
 
 		Scene scene = new Scene();
 		Image image = new Image(5, 5);
@@ -336,7 +339,7 @@ public class Ray1Test extends RayHelpers
 			image.setSize(nx, ny);
 			
 			Vector3 d = RayTracer.computeRayDirection(scene, basis, i, j);
-//			System.out.println(d);
+			System.out.println(d);
 			String message = "computeRayDirection fails for" +
 			        " viewWidth=" + viewWidth + 
 					"; viewHeight=" + viewHeight + 
@@ -357,78 +360,91 @@ public class Ray1Test extends RayHelpers
 			assertEquals(message, correctDirection.z, d.z, EPS);
 		}
 	}
-	
+
+    @Test
+    public void testAmbient()
+    {
+    	runTests("scenes2/ambient");
+    }
+    
     /**
-     * This tests planes with constant color.
+     * This tests sphere intersection.
      */
     @Test
-    public void testPlaneConstant()
+    public void testSphereConstant()
     {
-    	runTests("scenes1/plane-constant");
+    	runTests("scenes2/sphere-constant");
+    }
+    
+    /**
+     * This tests sphere normals.
+     */
+    @Test
+    public void testSphereNormals()
+    {
+    	runTests("scenes2/sphere-normal");
     }
 
     /**
-     * This tests planes shading the surface normals.
+     * This tests box intersection.
      */
     @Test
-    public void testPlaneNormal()
+    public void testBoxConstant()
     {
-    	runTests("scenes1/plane-normal");
+    	runTests("scenes2/box-constant");
     }
 
     /**
-     * This tests discs with constant color.
+     * This tests box normals.
      */
     @Test
-    public void testDiscConstant()
+    public void testBoxNormals()
     {
-    	runTests("scenes1/disc-constant");
+    	runTests("scenes2/box-normal");
+    }
+    
+    /**
+     * This tests diffuse shading.
+     */
+    @Test
+    public void testDiffuseShading()
+    {
+    	runTests("scenes2/diffuse");
+    }
+    
+        /**
+     * This tests specular shading.
+     */
+    @Test
+    public void testSpecularShading()
+    {
+    	runTests("scenes2/specular");
+    }
+    
+    /**
+     * This tests specular shading.
+     */
+    @Test
+    public void testShadows()
+    {
+    	runTests("scenes2/shadows");
     }
 
     /**
-     * This tests planes shading the surface normals.
+     * This tests the wire box model.
      */
     @Test
-    public void testDiscNormal()
+    public void testWireBox()
     {
-    	runTests("scenes1/disc-normal");
+    	runTests("scenes2/wire-box");
     }
 
     /**
-     * This tests two planes with constant color.
+     * This tests the wire box model.
      */
     @Test
-    public void testMultiplePlanes()
+    public void testWireBoxShiftedPerspective()
     {
-    	runTests("scenes1/multiple-planes-constant");
-    	runTests("scenes1/multiple-planes-normal");
-    }
-
-    /**
-     * This tests two discs with constant color.
-     */
-    @Test
-    public void testMultipleDiscs()
-    {
-    	runTests("scenes1/multiple-discs-constant");
-    	runTests("scenes1/multiple-discs-normal");
-    }
-
-    /**
-     * This tests overlapping discs
-     */
-    @Test
-    public void testMultipleObjects()
-    {
-    	runTests("scenes1/multiple-objects");
-    }
-
-    /**
-     * This tests the rays generated using Mario.
-     */
-    @Test
-    public void testMario()
-    {
-    	runTests("scenes1/mario");
+    	runTests("scenes2/shifted-perspective");
     }
 }

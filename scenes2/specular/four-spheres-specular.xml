@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  First test scene, only uses spheres, Lambertian shading,
+      and one light directly above the center of the 3 spheres.
+ -->
+<scene>
+  <camera>
+    <viewPoint>5 4.5 4</viewPoint>
+    <viewDir>-5 -3.5 -4</viewDir>
+    <projNormal>5 3.5 4</projNormal>
+    <viewUp>0 1 0</viewUp>
+    <viewWidth>0.75</viewWidth>
+    <viewHeight>0.76</viewHeight>
+  </camera>
+  <image>
+    300 300
+  </image>
+  <material name="red" type="Phong">
+    <color>1 .3 .2</color>
+    <specularColor>1 1 1</specularColor>
+    <exponent>10</exponent>
+  </material>
+  <material name="green" type="Phong">
+    <color>.2 1 .3</color>
+    <specularColor>1 1 1</specularColor>
+    <exponent>10</exponent>
+  </material>
+  <material name="blue" type="Phong">
+    <color>.2 .3 1</color>
+    <specularColor>1 1 1</specularColor>
+    <exponent>10</exponent>
+  </material>
+  <material name="gray" type="Phong">
+    <color>.5 .5 .5</color>
+    <specularColor>1 1 1</specularColor>
+    <exponent>10</exponent>
+  </material>
+  <surface type="Sphere">
+    <material ref="red" />
+    <radius>1</radius>
+    <center>0 1 0.866</center>
+  </surface>
+  <surface type="Sphere">
+    <material ref="green" />
+    <radius>1</radius>
+    <center>1 1 -0.866</center>
+  </surface>
+  <surface type="Sphere">
+    <material ref="blue" />
+    <radius>1</radius>
+    <center>-1 1 -0.866</center>
+  </surface>
+  <surface type="Sphere">
+    <material ref="gray" />
+    <radius>100</radius>
+    <center>0 -100 0</center>
+  </surface>
+  <light type="PointLight">
+    <position>5 4.5 4</position>
+    <intensity>35 35 35</intensity>
+  </light>
+</scene>

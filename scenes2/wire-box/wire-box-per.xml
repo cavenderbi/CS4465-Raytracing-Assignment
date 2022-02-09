@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--  A view of a stick-and-ball cube through a "normal" 
+    perspective camera.  The balls are colored according to the 
+    coordinates of the corners, with R, G, and B corresponding 
+    to x, y, and z.  This way you can tell which side is which: 
+    for instance white (1,1,1) is the +x, +y, +z corner, and 
+    magenta (1, 0, 1) is the +x, -y, +z corner.
+ -->
+<scene>
+  <camera>
+    <viewPoint>10 4.2 6</viewPoint>
+    <viewDir>-5 -2.1 -3</viewDir>
+    <projNormal>5 2.1 3</projNormal>
+    <viewUp>0 1 0</viewUp>
+    <projDistance>6</projDistance>
+    <viewWidth>4</viewWidth>
+    <viewHeight>2.25</viewHeight>
+  </camera>
+  <image>
+    320 180
+  </image>
+
+  <material name="ball000" type="Phong">
+    <color>.05 .05 .05</color><specularColor>.8 .8 .8</specularColor><exponent>50</exponent>
+  </material>
+  <material name="ball001" type="Phong">
+    <color>.1 .1 .8</color><specularColor>.8 .8 .8</specularColor><exponent>50</exponent>
+  </material>
+  <material name="ball010" type="Phong">
+    <color>.1 .6 .15</color><specularColor>.8 .8 .8</specularColor><exponent>50</exponent>
+  </material>
+  <material name="ball011" type="Phong">
+    <color>0 .6 1</color><specularColor>.8 .8 .8</specularColor><exponent>50</exponent>
+  </material>
+  <material name="ball100" type="Phong">
+    <color>.9 0 0</color><specularColor>.8 .8 .8</specularColor><exponent>50</exponent>
+  </material>
+  <material name="ball101" type="Phong">
+    <color>.9 .1 .9</color><specularColor>.8 .8 .8</specularColor><exponent>50</exponent>
+  </material>
+  <material name="ball110" type="Phong">
+    <color>.9 .9 .1</color><specularColor>.8 .8 .8</specularColor><exponent>50</exponent>
+  </material>
+  <material name="ball111" type="Phong">
+    <color> 1  1  1</color><specularColor>.8 .8 .8</specularColor><exponent>50</exponent>
+  </material>
+  <material name="stick" type="Lambertian">
+    <color>.6 .5 .3</color>
+  </material>
+  <material name="gray" type="Lambertian">
+    <color>.4 .4 .4</color>
+  </material>
+
+  <surface type="Box"><material ref="stick" />
+    <minPt>-1.05 -1.05 -1</minPt><maxPt>-.95 -.95 1</maxPt></surface>
+  <surface type="Box"><material ref="stick" />
+    <minPt>-1.05   .95 -1</minPt><maxPt>-.95 1.05 1</maxPt></surface>
+  <surface type="Box"><material ref="stick" />
+    <minPt>  .95 -1.05 -1</minPt><maxPt>1.05 -.95 1</maxPt></surface>
+  <surface type="Box"><material ref="stick" />
+    <minPt>  .95   .95 -1</minPt><maxPt>1.05 1.05 1</maxPt></surface>
+
+  <surface type="Box"><material ref="stick" />
+    <minPt>-1.05 -1 -1.05</minPt><maxPt>-.95 1 -.95</maxPt></surface>
+  <surface type="Box"><material ref="stick" />
+    <minPt>-1.05 -1   .95</minPt><maxPt>-.95 1 1.05</maxPt></surface>
+  <surface type="Box"><material ref="stick" />
+    <minPt>  .95 -1 -1.05</minPt><maxPt>1.05 1 -.95</maxPt></surface>
+  <surface type="Box"><material ref="stick" />
+    <minPt>  .95 -1   .95</minPt><maxPt>1.05 1 1.05</maxPt></surface>
+
+  <surface type="Box"><material ref="stick" />
+    <minPt>-1 -1.05 -1.05</minPt><maxPt>1 -.95 -.95</maxPt></surface>
+  <surface type="Box"><material ref="stick" />
+    <minPt>-1 -1.05   .95</minPt><maxPt>1 -.95 1.05</maxPt></surface>
+  <surface type="Box"><material ref="stick" />
+    <minPt>-1   .95 -1.05</minPt><maxPt>1 1.05 -.95</maxPt></surface>
+  <surface type="Box"><material ref="stick" />
+    <minPt>-1   .95   .95</minPt><maxPt>1 1.05 1.05</maxPt></surface>
+
+  <surface type="Sphere"><material ref="ball000" />
+    <center>-1 -1 -1</center><radius>0.2</radius></surface>
+  <surface type="Sphere"><material ref="ball001" />
+    <center>-1 -1  1</center><radius>0.2</radius></surface>
+  <surface type="Sphere"><material ref="ball010" />
+    <center>-1  1 -1</center><radius>0.2</radius></surface>
+  <surface type="Sphere"><material ref="ball011" />
+    <center>-1  1  1</center><radius>0.2</radius></surface>
+  <surface type="Sphere"><material ref="ball100" />
+    <center> 1 -1 -1</center><radius>0.2</radius></surface>
+  <surface type="Sphere"><material ref="ball101" />
+    <center> 1 -1  1</center><radius>0.2</radius></surface>
+  <surface type="Sphere"><material ref="ball110" />
+    <center> 1  1 -1</center><radius>0.2</radius></surface>
+  <surface type="Sphere"><material ref="ball111" />
+    <center> 1  1  1</center><radius>0.2</radius></surface>
+
+  <surface type="Box">
+    <material ref="gray" />
+    <minPt>-50 -1.5 -50</minPt>
+    <maxPt>50 -1.2 50</maxPt>
+  </surface>
+
+  <light type="PointLight">
+    <position> 4  5 -3</position><intensity>30 30 30</intensity>
+  </light>
+  <light type="PointLight">
+    <position>-4  3  5</position><intensity>20 20 20</intensity>
+  </light>
+  <light type="PointLight">
+    <position>10 4.2 6</position><intensity>10 10 10</intensity>
+  </light>
+</scene>

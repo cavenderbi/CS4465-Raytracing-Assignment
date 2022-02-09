@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<scene>
+  <camera>
+    <viewPoint>0 0 0</viewPoint>
+    <projDistance>1</projDistance>
+    <viewWidth>2</viewWidth>
+    <viewHeight>2</viewHeight>
+    <viewDir>0 -1 0</viewDir>
+    <projNormal>0 1 0</projNormal>
+    <viewUp>1 0 0</viewUp>
+  </camera>
+  <image>200 200</image>
+  <light type="AmbientLight">
+    <intensity>0.2 0.2 0.2</intensity>
+  </light>
+  <material name="yellow" type="Lambertian">
+    <color>1 0.839 0.008</color>
+  </material>
+  <surface type="Disc">
+    <material ref="yellow"/>
+    <point>0 -1 0</point>
+    <normal>0 1 0</normal>
+    <radius>1</radius>
+  </surface>
+</scene>

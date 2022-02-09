@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<scene>
+  <camera>
+    <viewPoint>0 0 0</viewPoint>
+    <projDistance>1</projDistance>
+    <viewWidth>2</viewWidth>
+    <viewHeight>2</viewHeight>
+    <viewDir>-1 0 0</viewDir>
+    <projNormal>1 0 0</projNormal>
+    <viewUp>0 1 0</viewUp>
+  </camera>
+  <image>200 200</image>
+  <light type="AmbientLight">
+    <intensity>0.2 0.2 0.2</intensity>
+  </light>
+  <material name="green" type="Lambertian">
+    <color>0.008 0.608 0.282</color>
+  </material>
+  <surface type="Plane">
+    <material ref="green"/>
+    <point>-1 0 0</point>
+    <normal>1 0 0</normal>
+  </surface>
+</scene>
