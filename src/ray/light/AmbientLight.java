@@ -20,9 +20,16 @@ public class AmbientLight extends Light {
 	 */
 	public AmbientLight() { }
 
-	/*	intensity * hit.surface.material.color
-		element-wise multiply */
-	public Color illuminate(HitRecord hit) { return null; }
+
+	public Color illuminate(HitRecord hit) {
+		/*	intensity * hit.surface.material.color
+			element-wise multiply */
+		double r, g, b;
+		r = intensity.r * hit.surface.getMaterial().getColor().r;
+		g = intensity.g * hit.surface.getMaterial().getColor().g;
+		b = intensity.b * hit.surface.getMaterial().getColor().b;
+		return new Color(r, g, b);
+	}
 	
 	/**
 	 * @see Object#toString()
