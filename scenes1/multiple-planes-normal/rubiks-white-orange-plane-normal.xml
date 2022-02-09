@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<scene>
+  <camera>
+    <viewPoint>0 0 0</viewPoint>
+    <projDistance>1</projDistance>
+    <viewWidth>2</viewWidth>
+    <viewHeight>2</viewHeight>
+    <viewDir>0 1 -1</viewDir>
+    <projNormal>0 -1 1</projNormal>
+    <viewUp>0 1 0</viewUp>
+  </camera>
+  <image>200 200</image>
+  <light type="NormalLight"/>
+
+  <material name="white" type="Lambertian">
+    <color>1 1 1</color>
+  </material>
+  <surface type="Plane">
+    <material ref="white"/>
+    <point>0 1 0</point>
+    <normal>0 -1 0</normal>
+  </surface>
+  <material name="orange" type="Lambertian">
+    <color>0.996 0.349 0</color>
+  </material>
+  <surface type="Plane">
+    <material ref="orange"/>
+    <point>0 0 -1</point>
+    <normal>0 0 1</normal>
+  </surface>
+</scene>

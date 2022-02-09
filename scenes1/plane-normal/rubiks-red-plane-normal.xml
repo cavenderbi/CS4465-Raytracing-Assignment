@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<scene>
+  <camera>
+    <viewPoint>0 0 0</viewPoint>
+    <projDistance>1</projDistance>
+    <viewWidth>2</viewWidth>
+    <viewHeight>2</viewHeight>
+    <viewDir>0 0 1</viewDir>
+    <projNormal>0 0 -1</projNormal>
+    <viewUp>0 1 0</viewUp>
+  </camera>
+  <image>200 200</image>
+  <light type="NormalLight"/>
+  <surface type="Plane">
+    <point>0 0 1</point>
+    <normal>0 0 -1</normal>
+  </surface>
+</scene>

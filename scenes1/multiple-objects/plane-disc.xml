@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--Test all white image using a single sphere.-->
+<scene>
+  <camera>
+    <viewPoint>3 0 0</viewPoint>
+    <viewDir>-1 0 0</viewDir>
+    <projNormal>1 0 0</projNormal>
+    <viewUp>0 1 0</viewUp>
+    <projDistance>1</projDistance>
+    <viewWidth>1</viewWidth>
+    <viewHeight>1</viewHeight>
+  </camera>
+  <image>
+    300 300
+  </image>
+  <material name="gray" type="Lambertian">
+    <color>0.5 0.5 0.5</color>
+  </material>
+  <material name="gold" type="Lambertian">
+    <color>.9922 .7529 .062745098</color>
+  </material>
+  <surface type="Plane">
+    <material ref="gray" />
+    <point>0 0 0</point>
+    <normal>1 0 0</normal>
+  </surface>
+  <surface type="Disc">
+    <material ref="gold" />
+    <point>1 0 0</point>
+    <normal>1 0 0</normal>
+    <radius>1</radius>
+  </surface>
+  <light type="ConstantLight"/>
+
+</scene>
