@@ -23,7 +23,7 @@ public class Plane extends Surface {
 
 	public HitRecord hit(Vector3 direction, Point3 origin) {
 		/*	t = -((origin - point) dot n) / direction dot normal */
-		Vector3 op = new Vector3(); // new black Vector3, no other referencess
+		Vector3 op = new Vector3(); // new blank Vector3, no other referencess
 		op.sub(origin, point);		// op gets set to o - p
 		double t = -op.dot(normal) / direction.dot(normal);
 		return new HitRecord(this, t, new Vector3(normal));

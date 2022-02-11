@@ -155,8 +155,8 @@ public class RayTracer {
 		Color rgb = new Color();
 		int i, j;
 		// For ever pixel in thxe image, cast a ray to see what color it intersects with. 
-		for (i = 0; i < scene.outputImage.height; i++) {
-			for (j = 0; j < scene.outputImage.width; j++) {
+		for (i = 0; i < scene.outputImage.width; i++) {
+			for (j = 0; j < scene.outputImage.height; j++) {
 				ray = computeRayDirection(scene, basis, i, j);
 			    /*	What and where does the ray intersect with anything in the scene, 
 					if anything at all. */
