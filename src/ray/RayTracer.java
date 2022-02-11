@@ -114,20 +114,17 @@ public class RayTracer {
 		*/
 		double pixelWidth = scene.camera.viewWidth / scene.outputImage.width;
 		double pixelHeight = scene.camera.viewHeight / scene.outputImage.height;
-		Vector3 u = new Vector3(basis[0]), v = new Vector3(basis[1]), w = new Vector3(basis[2]);
 
 		Point3 viewpoint = new Point3(scene.camera.viewPoint);
 		Point3 point = new Point3(viewpoint);
-		w.normalize();
-		w.scale(scene.camera.projDistance);
-		point.add(w);
-		u.scale(-(pixelWidth / 2 + i * pixelWidth - scene.camera.viewWidth / 2));
-		v.scale(scene.camera.viewHeight / 2 - pixelHeight / 2 - j * pixelHeight);
-		point.add(u);
-		point.add(v);
+		Vector3 direction = new Vector3(scene.camera.viewDir);
+		direction.normalize();
+		point.scaleAdd(scene.camera.projDistance, direction);
+		point.scaleAdd(pixelWidth / 2 + i * pixelWidth - scene.camera.viewWidth / 2, basis[0]);
+		point.scaleAdd(-(scene.camera.viewHeight / 2 - pixelHeight / 2 - j * pixelHeight), basis[1]);
 		
 		Vector3 answer = new Vector3();
-		answer.sub(viewpoint, point);
+		answer.sub(point, viewpoint);
 
 		return answer;
 	}
