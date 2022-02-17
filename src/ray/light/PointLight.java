@@ -35,7 +35,7 @@ public class PointLight extends Light {
 		Vector3 light = new Vector3();
 		light.sub(position, hitpoint);
 		light.normalize();
-		/*	l dot n / d^2 */
+		/*	{vec{ l } cdot vec { n }} over d^2 */
 		double geometric = Math.max(light.dot(hit.normal) / position.distanceSquared(hitpoint), 0);
 		/*	Use the offset and the intensity to calculate the color. */
 		Color point = hit.surface.getMaterial().evaluate(hit, new Color(geometric * intensity.r, geometric * intensity.g, geometric * intensity.b), light, ray);
