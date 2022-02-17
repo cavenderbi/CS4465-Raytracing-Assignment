@@ -2,6 +2,9 @@ package ray.light;
 
 import ray.math.Color;
 import ray.math.Point3;
+import ray.math.Ray;
+import ray.math.Vector3;
+import ray.surface.Group;
 import ray.surface.HitRecord;
 
 /**
@@ -26,8 +29,25 @@ public class PointLight extends Light {
 	 */
 	public PointLight() { }
 
-	/* light dot normal / distance^2 */
-	public Color illuminate(HitRecord hit) { return null; }
+	/**	light dot normal / distance^2 */
+	public Color illuminate(HitRecord hit, Ray ray, Group group) {
+		Point3 hitpoint = ray.evaluate(hit.t);
+		Vector3 light = new Vector3();
+		light.sub(position, hitpoint);
+		light.normalize();
+		/*	l dot n / d^2 */
+		double geometric = Math.max(light.dot(hit.normal) / position.distanceSquared(hitpoint), 0);
+		/*	Use the offset and the intensity to calculate the color. */
+		Color point = hit.surface.getMaterial().evaluate(hit, new Color(geometric * intensity.r, geometric * intensity.g, geometric * intensity.b), light, ray);
+		/*	Shadows: 
+			hitpoint + t * light
+			remember to normalize light if not already
+			if light ray intersects with groups and 1e-4 < t < 1, is shadow. */
+		HitRecord shadow_hit = group.hit(light, hitpoint);
+		if (shadow_hit != null && 1e-4 < shadow_hit.t) 
+			return new Color(0, 0, 0);
+		else return point;
+	}
 	
 	/**
 	 * @see Object#toString()

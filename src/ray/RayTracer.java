@@ -3,6 +3,7 @@ package ray;
 import ray.light.Light;
 import ray.math.Color;
 import ray.math.Point3;
+import ray.math.Ray;
 import ray.math.Vector3;
 import ray.surface.HitRecord;
 
@@ -147,25 +148,35 @@ public class RayTracer {
 		System.out.println("" + basis[0] + basis[1] + basis[2]);
 		System.out.println(image.getHeight());
 		
-		Vector3 ray;
+		Vector3 direction;
 		HitRecord hit;
 		Color rgb = new Color();
+		double r = 0, g = 0, b = 0;
 		int i, j;
 		// For ever pixel in thxe image, cast a ray to see what color it intersects with. 
 		for (i = 0; i < scene.outputImage.width; i++) {
 			for (j = 0; j < scene.outputImage.height; j++) {
-				ray = computeRayDirection(scene, basis, i, j);
+				direction = computeRayDirection(scene, basis, i, j);
 			    /*	What and where does the ray intersect with anything in the scene, 
 					if anything at all. */
-				hit = scene.group.hit(ray, scene.camera.viewPoint);
+				hit = scene.group.hit(direction, scene.camera.viewPoint);
 				/*	If the ray intersected with a surface in the scene at all it would 
 					retun a valid hit record. From there we calculate the color of the pixel. 
 					If the ray missed all surfaces in the scene, we explicitly set the color
 					to black to avoid any null color issues. */
 				if (hit != null) {
-					for (Light light : scene.lights) 
-						rgb = light.illuminate(hit);
-					scene.outputImage.setPixelColor(rgb, i, j);
+					Ray ray = new Ray(scene.camera.viewPoint, direction);
+					r = 0; g = 0; b = 0;
+					for (Light light : scene.lights) {
+						rgb = light.illuminate(hit, ray, scene.group);
+						r += rgb.r;
+						g += rgb.g;
+						b += rgb.b;
+					}
+					if (r > 1) r = 1; else if (r < 0) r = 0;
+					if (g > 1) g = 1; else if (g < 0) g = 0;
+					if (b > 1) b = 1; else if (b < 0) b = 0;
+					scene.outputImage.setPixelRGB(r, g, b, i, j);
 				} else scene.outputImage.setPixelRGB(0, 0, 0, i, j);
 			}
 		}

@@ -1,6 +1,8 @@
 package ray.light;
 
 import ray.math.Color;
+import ray.math.Ray;
+import ray.surface.Group;
 import ray.surface.HitRecord;
 
 /**
@@ -15,7 +17,7 @@ public class NormalLight extends Light {
 	 */
 	public NormalLight() { }
 
-	public Color illuminate(HitRecord hit) {
+	public Color illuminate(HitRecord hit, Ray ray, Group group) {
 		double r, g, b;
 		r = (hit.normal.x + 1) / 2;
 		g = (hit.normal.y + 1) / 2;

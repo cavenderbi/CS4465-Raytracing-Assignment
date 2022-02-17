@@ -1,6 +1,8 @@
 package ray.light;
 
 import ray.math.Color;
+import ray.math.Ray;
+import ray.surface.Group;
 import ray.surface.HitRecord;
 
 /**
@@ -21,7 +23,7 @@ public class AmbientLight extends Light {
 	public AmbientLight() { }
 
 
-	public Color illuminate(HitRecord hit) {
+	public Color illuminate(HitRecord hit, Ray ray, Group group) {
 		/*	intensity * hit.surface.material.color
 			element-wise multiply */
 		double r, g, b;

@@ -2,6 +2,8 @@
 package ray.light;
 
 import ray.math.Color;
+import ray.math.Ray;
+import ray.surface.Group;
 import ray.surface.HitRecord;
 
 /**
@@ -16,7 +18,7 @@ public class ConstantLight extends Light {
 	 */
 	public ConstantLight() { }
 
-	public Color illuminate(HitRecord hit) {
+	public Color illuminate(HitRecord hit, Ray ray, Group group) {
 		return new Color(hit.surface.getMaterial().getColor());
 	}
 	

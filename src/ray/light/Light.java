@@ -1,6 +1,8 @@
 package ray.light;
 
 import ray.math.Color;
+import ray.math.Ray;
+import ray.surface.Group;
 import ray.surface.HitRecord;
 
 /**
@@ -10,5 +12,5 @@ import ray.surface.HitRecord;
  * @author parryrm
  */
 public abstract class Light {
-    public abstract Color illuminate(HitRecord hit);
+    public abstract Color illuminate(HitRecord hit, Ray ray, Group group);
 }
