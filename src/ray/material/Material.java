@@ -1,8 +1,6 @@
 package ray.material;
 
-import ray.light.Light;
 import ray.math.Color;
-import ray.math.Point3;
 import ray.math.Ray;
 import ray.math.Vector3;
 import ray.surface.HitRecord;
