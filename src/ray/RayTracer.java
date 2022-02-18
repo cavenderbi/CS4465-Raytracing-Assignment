@@ -151,7 +151,7 @@ public class RayTracer {
 		System.out.println(image.getHeight());
 		
 		Vector3 direction;
-		Ray ray;
+		Ray ray = new Ray();
 		HitRecord hit;
 		Color rgb = new Color();
 		int i, j;
@@ -162,19 +162,19 @@ public class RayTracer {
 			    /*	What and where does the ray intersect with anything in the scene, 
 					if anything at all. */
 				hit = scene.group.hit(direction, scene.camera.viewPoint);
-				/*	If the ray intersected with a surface in the scene at all it would 
-					retun a valid hit record. From there we calculate the color of the pixel. 
-					If the ray missed all surfaces in the scene, we explicitly set the color
-					to black to avoid any null color issues. */
+				/*	If the ray missed all of the objects in the seen, it would return null. 
+					Otherwise, calculate the color of the pixel. */
 				if (hit != null) {
-					ray = new Ray(scene.camera.viewPoint, direction);
+					ray.set(scene.camera.viewPoint, direction);
 					/*	Reset the color to 0 inbetween each pixel. */
-					rgb = new Color();
+					rgb.set(0, 0, 0);
+					/*	Calculate how much each light in the scene contributes to the color of that pixel. */
 					for (Light light : scene.lights)
 						rgb.add(light.illuminate(hit, ray, scene.group));
 					rgb.clamp(0, 1);
+					/*	Write the calculated color to the pixel. */
 					scene.outputImage.setPixelColor(rgb, i, j);
-				} else scene.outputImage.setPixelRGB(0, 0, 0, i, j);
+				}
 			}
 		}
 		// Output time
