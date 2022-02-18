@@ -22,22 +22,20 @@ public class Phong extends Material {
 	
 	public Phong() { }
 
-	public Color evaluate(HitRecord hit, Color irradiance, Vector3 light, Ray ray) { 
-		double r, g, b, geometric;
+	public Color evaluate(HitRecord hit, Color irradiance, Vector3 light, Ray ray) {
 		Vector3 h = new Vector3(), view = new Vector3();
+		Color L_r = new Color(color);
 		/*	Draw a normalized vector from the hitpoint towards the camera. */
 		view.sub(ray.origin, ray.evaluate(hit.t));
+		view.normalize();
 		/*	h = (l + v) / || l + v || */
 		h.add(view, light);
 		h.normalize();
 		/*	L_r = diffuse + specular * max(0, (n dot h)^P) */
-		geometric = Math.max(0, Math.pow(hit.normal.dot(h), exponent));
-
-		r = (color.r + specularColor.r * geometric) * irradiance.r;
-		g = (color.g + specularColor.g * geometric) * irradiance.g;
-		b = (color.b + specularColor.b * geometric) * irradiance.b;
+		L_r.scaleAdd(Math.max(0, Math.pow(hit.normal.dot(h), exponent)), specularColor);
+		L_r.scale(irradiance);
 		
-		return new Color(r, g, b);
+		return L_r;
 	}
 	
 	/**

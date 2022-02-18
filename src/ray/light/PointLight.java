@@ -38,7 +38,6 @@ public class PointLight extends Light {
 		/*	{vec{ l } cdot vec { n }} over d^2 */
 		double geometric = Math.max(light.dot(hit.normal) / position.distanceSquared(hitpoint), 0);
 		/*	Use the offset and the intensity to calculate the color. */
-		Color point = hit.surface.getMaterial().evaluate(hit, new Color(geometric * intensity.r, geometric * intensity.g, geometric * intensity.b), light, ray);
 		/*	Shadows: 
 			hitpoint + t * light
 			remember to normalize light if not already
@@ -46,7 +45,7 @@ public class PointLight extends Light {
 		HitRecord shadow_hit = group.hit(light, hitpoint);
 		if (shadow_hit != null && 1e-4 < shadow_hit.t) 
 			return new Color(0, 0, 0);
-		else return point;
+		else return hit.surface.getMaterial().evaluate(hit, new Color(geometric * intensity.r, geometric * intensity.g, geometric * intensity.b), light, ray);
 	}
 	
 	/**

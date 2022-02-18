@@ -25,51 +25,53 @@ public class RayTracer {
 	 * @param args
 	 */
 	public static final void main(String[] args) {
-		for (String inputString : args)
-		{
-			File inputFile = new File(inputString);
-			if (inputFile.isFile()) 
-			{
-				if (inputFile.getName().endsWith(".xml"))
-				{
-					runXML(inputFile.getPath());
-				}
-			}
-			else if (inputFile.isDirectory())
-			{
-				File[] listing = inputFile.listFiles();
-				if (listing != null) 
-				{
-					for (File file : listing) 
-					{
-						if (file.getName().endsWith(".xml"))
-						{
-							runXML(inputString + "/" + file.getName());
-						}
-					}
-				}
-			}
-			else
-			{
-				System.out.println("Input argument \"" + inputString + "\" is neither an XML file nor a directory.");
-			}
-		}
-	}
+        for (String inputString : args)
+        {
+            recursiveXML(inputString);
+        }
+    }
+    
+    public static void recursiveXML(String inputString)
+    {
+        File inputFile = new File(inputString);
+        if (inputFile.isFile())
+        {
+            if (inputFile.getName().endsWith(".xml"))
+            {
+                runXML(inputFile.getPath());
+            }
+        }
+        else if (inputFile.isDirectory())
+        {
+            File[] listing = inputFile.listFiles();
+            if (listing != null)
+            {
+                for (File file : listing)
+                {
+                    recursiveXML(inputString + "/" + file.getName());
+                }
+            }
+        }
+        else
+        {
+            System.out.println("Input argument \"" + inputString + "\" is neither an XML file nor a directory.");
+        }
+    }
 
-	public static void runXML(String inputFilename)
-	{
-		Parser parser = new Parser();
-		String outputFilename = inputFilename + ".png";
-		System.out.println(inputFilename);
-		// Parse the input file
-		Scene scene = (Scene) parser.parse(inputFilename, Scene.class);
+    public static void runXML(String inputFilename)
+    {
+        Parser parser = new Parser();
+        String outputFilename = inputFilename + ".png";
+        System.out.println(inputFilename);
+        // Parse the input file
+        Scene scene = (Scene) parser.parse(inputFilename, Scene.class);
 
-		// Render the scene
-		renderImage(scene);
+        // Render the scene
+        renderImage(scene);
 
-		// Write the image out
-		scene.getImage().write(outputFilename);
-	}
+        // Write the image out
+        scene.getImage().write(outputFilename);
+    }
 	
 	/**
 	 * Compute the basis for the camera coordinate system (u, v, w)
@@ -149,9 +151,9 @@ public class RayTracer {
 		System.out.println(image.getHeight());
 		
 		Vector3 direction;
+		Ray ray;
 		HitRecord hit;
 		Color rgb = new Color();
-		double r = 0, g = 0, b = 0;
 		int i, j;
 		// For ever pixel in thxe image, cast a ray to see what color it intersects with. 
 		for (i = 0; i < scene.outputImage.width; i++) {
@@ -165,18 +167,13 @@ public class RayTracer {
 					If the ray missed all surfaces in the scene, we explicitly set the color
 					to black to avoid any null color issues. */
 				if (hit != null) {
-					Ray ray = new Ray(scene.camera.viewPoint, direction);
-					r = 0; g = 0; b = 0;
-					for (Light light : scene.lights) {
-						rgb = light.illuminate(hit, ray, scene.group);
-						r += rgb.r;
-						g += rgb.g;
-						b += rgb.b;
-					}
-					r = Math.max(0, Math.min(1, r));
-					g = Math.max(0, Math.min(1, g));
-					b = Math.max(0, Math.min(1, b));
-					scene.outputImage.setPixelRGB(r, g, b, i, j);
+					ray = new Ray(scene.camera.viewPoint, direction);
+					/*	Reset the color to 0 inbetween each pixel. */
+					rgb = new Color();
+					for (Light light : scene.lights)
+						rgb.add(light.illuminate(hit, ray, scene.group));
+					rgb.clamp(0, 1);
+					scene.outputImage.setPixelColor(rgb, i, j);
 				} else scene.outputImage.setPixelRGB(0, 0, 0, i, j);
 			}
 		}

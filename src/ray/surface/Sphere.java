@@ -30,7 +30,7 @@ public class Sphere extends Surface {
 		c = oc.dot(oc) - radius * radius;
 		
 		double discr = b * b - 4 * a * c;
-		if (discr < 0) return null;
+		if (discr < 1e-4) return null;
 		else {
 			double numer = -b - Math.sqrt(discr);
 			if (numer > 0) 
@@ -49,7 +49,7 @@ public class Sphere extends Surface {
 		normal.sub(hitpoint, center); // Vector from center to hitpoint. 
 		normal.normalize();
 
-		if (t > 0) 
+		if (t > 1e-4) 
 			return new HitRecord(this, t, normal);
 		else return null;
 	}
